@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Reader Index";
+}
+
+@model IEnumerable<ZenNetApp.Models.Reader>
+
+<!-- Galvenais konteiners -->
+<div class="w-full flex flex-col p-8 bg-gray-900 text-gray-100 min-h-screen font-sans">
+
+    <!-- Virsraksts -->
+    <header class="mb-8">
+        <h1 class="text-3xl font-bold tracking-wide">Lasītāju CRUD</h1>
+        <p class="text-gray-400 mt-2">
+            Šajā lapā lietotājs var <strong>lasīt</strong>, <strong>rakstīt</strong>, <strong>modificēt</strong> un <strong>dzēst</strong> tabulas saturu.
+        </p>
+    </header>
+
+    <!-- Informācijas bloks -->
+    <section class="mb-8 p-5 bg-gray-800">
+        <h2 class="text-xl font-semibold mb-2">Lietotāj!</h2>
+        <p class="text-gray-300">
+            Šajā lapā tu vari veikt CRUD operācijas ar lasītājiem. Izmanto pieejamos rīkus, lai pārvaldītu žanru sarakstu pēc savām vajadzībām.
+        </p>
+    </section>
+
+    <!-- Žanru tabula -->
+    <section class="mt-8 w-full">
+        <h2 class="text-xl font-semibold mb-4">Sistēmas lasītāji</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse border border-gray-700 text-left text-gray-100 bg-gray-800">
+                <thead class="bg-gray-700">
+                    <tr>
+                        <th class="p-3 border border-gray-600">Vārds</th>
+                        <th class="p-3 border border-gray-600">Epasts</th>
+                        <th class="p-3 border border-gray-600">Pieejamas operācijas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reader in Model)
+                    {
+                        <tr class="hover:bg-gray-700">
+                            <td class="p-3 border border-gray-600">@reader.Name</td>
+                            <td class="p-3 border border-gray-600">@reader.Email</td>
+                            <td class="p-3 border border-gray-600">
+                                <!-- Rediģēt -->
+                                <a asp-action="Edit" asp-route-id="@reader.Id" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">Rediģēt</a>
+                                <!-- Dzēst -->
+                                <a asp-action="Delete" asp-route-id="@reader.Id" class="bg-red-600  text-white px-3 py-1 rounded hover:bg-red-700">Dzēst</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Links uz Create formu -->
+    <div class="mt-6">
+        <a asp-action="Create" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Pievienot jaunu lasītāju</a>
+    </div>
+
+</div>

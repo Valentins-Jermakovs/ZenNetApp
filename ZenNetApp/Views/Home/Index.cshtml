@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Galvenais konteiners -->
+<div class="w-full flex flex-col p-8 bg-gray-900 text-gray-100 min-h-screen font-sans">
+
+    <!-- Virsraksts -->
+    <header class="mb-8">
+        <h1 class="text-3xl font-bold tracking-wide">Minimāla bibliotēkas sistēma</h1>
+        <p class="text-gray-400 mt-2">
+            Šis projekts ir demonstratīva tīmekļa lietotne CRUD darbam ar <strong>Grāmatu</strong>, <strong>Autoru</strong> un <strong>Žanru</strong> tabulām.
+        </p>
+    </header>
+
+    <!-- Informācijas bloks -->
+    <section class="mb-8 p-5 bg-gray-800">
+        <h2 class="text-xl font-semibold mb-2">Sveiks, lietotāj!</h2>
+        <p class="text-gray-300">
+            Šī sistēma ir paredzēta bibliotēku pārvaldībai. Galvenie dati ir aizsargāti un nav redzami demonstrācijas lapā.
+        </p>
+    </section>
+
+    <!-- Kartītes -->
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <!-- Grāmata -->
+        <div class="p-4 bg-gray-800 border border-gray-700 hover:bg-gray-600 cursor-pointer">
+            <a class="w-full flex-col flex" asp-area="" asp-controller="Book" asp-action="Index">
+                <h3 class="font-semibold mb-1">Grāmata, satur šādus laukus: </h3>
+                <ul class="p-5 list-disc">
+                    <li class="text-gray-300 text-sm">Id</li>
+                    <li class="text-gray-300 text-sm">Nosaukums</li>
+                    <li class="text-gray-300 text-sm">Izdošanas gads</li>
+                    <li class="text-gray-300 text-sm">Autora Id</li>
+                    <li class="text-gray-300 text-sm">Žanra Id</li>
+                    <li class="text-gray-300 text-sm">Brīva/tiek lasīta</li>
+                </ul>
+            </a>
+        </div>
+        <!-- Autors -->
+        <div class="p-4 bg-gray-800 border border-gray-700 hover:bg-gray-600 cursor-pointer">
+            <a class="w-full flex-col flex" asp-area="" asp-controller="Authors" asp-action="Index">
+                <h3 class="font-semibold mb-1">Autors, satur šādus laukus:</h3>
+                <ul class="p-5 list-disc">
+                    <li class="text-gray-300 text-sm">Id</li>
+                    <li class="text-gray-300 text-sm">Pilnais vārds</li>
+                    <li class="text-gray-300 text-sm">Valsts</li>
+                    <li class="text-gray-300 text-sm">Uzrakstītas grāmatas (Saite uz grāmatu tabulu) </li>
+                </ul>
+            </a>
+        </div>
+        <!-- Žanrs -->
+        <div class="p-4 bg-gray-800 border border-gray-700 hover:bg-gray-600 cursor-pointer">
+            <a class="w-full flex-col flex" asp-area="" asp-controller="Genre" asp-action="Index">
+                <h3 class="font-semibold mb-1">Žanrs, satur šādus laukus:</h3>
+                <ul class="p-5 list-disc">
+                    <li class="text-gray-300 text-sm">Id</li>
+                    <li class="text-gray-300 text-sm">Žanra nosaukums</li>
+                    <li class="text-gray-300 text-sm">Grāmatas, kas attiecināmas pie šī žanra (Saite uz grāmatu tabulu) </li>
+                </ul>
+            </a>
+        </div>
+        <!-- Izdevējs -->
+        <div class="p-4 bg-gray-800 border border-gray-700 hover:bg-gray-600 cursor-pointer">
+            <a class="w-full flex-col flex" asp-area="" asp-controller="Publisher" asp-action="Index">
+                <h3 class="font-semibold mb-1">Izdevējs, satur šādus laukus:</h3>
+                <ul class="p-5 list-disc">
+                    <li class="text-gray-300 text-sm">Id</li>
+                    <li class="text-gray-300 text-sm">Izdevēja nosaukums</li>
+                    <li class="text-gray-300 text-sm">Izdevēja valsts</li>
+                    <li class="text-gray-300 text-sm">Grāmatas, kas attiecināmas pie šī izdēvēja (Saite uz grāmatu tabulu) </li>
+                </ul>
+            </a>
+        </div>
+        <!-- Lasītājs -->
+        <div class="p-4 bg-gray-800 border border-gray-700 hover:bg-gray-600 cursor-pointer">
+            <a class="w-full flex-col flex" asp-area="" asp-controller="Reader" asp-action="Index">
+                <h3 class="font-semibold mb-1">Lasītājs, satur šādus laukus:</h3>
+                <ul class="p-5 list-disc">
+                    <li class="text-gray-300 text-sm">Id</li>
+                    <li class="text-gray-300 text-sm">Lasītāja vārds</li>
+                    <li class="text-gray-300 text-sm">Lasītāja epasts</li>
+                    <li class="text-gray-300 text-sm">Grāmatas, kas attiecināmas uz šo lasītāju (Saite uz grāmatu tabulu) </li>
+                </ul>
+            </a>
+        </div>
+    </section>
+</div>

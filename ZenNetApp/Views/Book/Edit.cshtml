@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model ZenNetApp.Models.Book
+
+<h2 class="text-2xl font-bold mb-4">Edit Book</h2>
+
+<h2>Edit Book</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" />
+        <span asp-validation-for="Title"></span>
+    </div>
+    <div>
+        <label asp-for="Year"></label>
+        <input asp-for="Year" />
+        <span asp-validation-for="Year"></span>
+    </div>
+    <div>
+        <label asp-for="AuthorId">Author</label>
+        <select asp-for="AuthorId" asp-items="ViewBag.Authors"></select>
+    </div>
+    <div>
+        <label asp-for="GenreId">Genre</label>
+        <select asp-for="GenreId" asp-items="ViewBag.Genres"></select>
+    </div>
+    <div>
+        <label asp-for="PublisherId">Publisher</label>
+        <select asp-for="PublisherId" asp-items="ViewBag.Publishers">
+        </select>
+    </div>
+    <div>
+        <label asp-for="BorrowedById">Borrowed By</label>
+        <select asp-for="BorrowedById" asp-items="ViewBag.Readers">
+            <option>---Null---</option>
+        </select>
+    </div>
+    <button type="submit">Create</button>
+</form>
