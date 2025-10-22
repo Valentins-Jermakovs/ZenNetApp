@@ -26,12 +26,23 @@ namespace ZenNetApp.Controllers
         // GET: AuthorsController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            // atraodam autoru pēc id un atgriežam visu viņa informāciju
+            var author = _context.Authors
+                .Include(a => a.Books)
+                .FirstOrDefault(a => a.Id == id);
+
+            if (author == null)
+            {
+                return NotFound();
+            }
+
+            return View(author);
         }
 
         // GET: AuthorsController/Create
         public ActionResult Create()
         {
+
             return View();
         }
 

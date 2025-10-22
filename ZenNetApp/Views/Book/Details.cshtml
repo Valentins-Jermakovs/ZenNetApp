@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Book Detail";
+}
+@model ZenNetApp.Models.Book
+
+<!-- Galvenais konteiners -->
+<div class="w-full flex flex-col p-8 bg-gray-900 text-gray-100 min-h-screen font-sans">
+
+    <!-- Virsraksts -->
+    <header class="mb-8">
+        <h1 class="text-3xl font-bold tracking-wide">Grāmatas Details</h1>
+        <p class="text-gray-400 mt-2">
+            Šajā lapā lietotājs var detalizēti <strong>lasīt</strong> izvēlēta ieraksta saturu.
+        </p>
+    </header>
+
+    <!-- Grāmatas tabula -->
+    <section class="mt-8 w-full">
+        <h2 class="text-xl font-semibold mb-4">Sistēmas grāmatas</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse border border-gray-700 text-left text-gray-100 bg-gray-800">
+                <thead class="bg-gray-700">
+                    <tr>
+                        <th class="p-3 border border-gray-600">Grāmatas Id datu bāzē</th>
+                        <th class="p-3 border border-gray-600">Nosaukums</th>
+                        <th class="p-3 border border-gray-600">Gads</th>
+                        <th class="p-3 border border-gray-600">Autors</th>
+                        <th class="p-3 border border-gray-600">Žanrs</th>
+                        <th class="p-3 border border-gray-600">Lasītājs</th>
+                        <th class="p-3 border border-gray-600">Izdevējs</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                        <tr class="hover:bg-gray-700">
+                            <td class="p-3 border border-gray-600">@Model.Id</td>
+                            <td class="p-3 border border-gray-600">@Model.Title</td>
+                            <td class="p-3 border border-gray-600">@Model.Year</td>
+                            <td class="p-3 border border-gray-600">@Model.Author?.Name</td>
+                            <td class="p-3 border border-gray-600">@Model.Genre?.Name</td>
+                            <td class="p-3 border border-gray-600">@Model.BorrowedBy?.Name</td>
+                            <td class="p-3 border border-gray-600">@Model.Publisher?.Name</td>
+                        </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+</div>

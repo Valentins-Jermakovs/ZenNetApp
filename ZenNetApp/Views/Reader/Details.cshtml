@@ -1,0 +1,64 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Reader Detail";
+}
+@model ZenNetApp.Models.Reader
+
+<!-- Galvenais konteiners -->
+<div class="w-full flex flex-col p-8 bg-gray-900 text-gray-100 min-h-screen font-sans">
+
+    <!-- Virsraksts -->
+    <header class="mb-8">
+        <h1 class="text-3xl font-bold tracking-wide">Lasītājs Details</h1>
+        <p class="text-gray-400 mt-2">
+            Šajā lapā lietotājs var detalizēti <strong>lasīt</strong> izvēlēta ieraksta saturu.
+        </p>
+    </header>
+
+    <!-- Grāmatas tabula -->
+    <section class="mt-8 w-full">
+        <h2 class="text-xl font-semibold mb-4">Sistēmas lasītāji</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse border border-gray-700 text-left text-gray-100 bg-gray-800">
+                <thead class="bg-gray-700">
+                    <tr>
+                        <th class="p-3 border border-gray-600">Lasītāja Id datu bāzē</th>
+                        <th class="p-3 border border-gray-600">Vārds, uzvārds</th>
+                        <th class="p-3 border border-gray-600">Epasts</th>
+                        <th class="p-3 border border-gray-600">Grāmatas, kas pie tā attiecināmas</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr class="hover:bg-gray-700">
+                        <td class="p-3 border border-gray-600">@Model.Id</td>
+                        <td class="p-3 border border-gray-600">@Model.Name</td>
+                        <td class="p-3 border border-gray-600">@Model.Email</td>
+                        <td class="p-3 border border-gray-600">
+                            <ul>
+                                <!-- Izvadam visas žanra grāmatas -->
+                                @foreach (var book in Model.BorrowedBooks)
+                                {
+                                    <li>
+                                        @book.Title
+                                    </li>
+
+                                }
+                            </ul>
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+</div>@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}

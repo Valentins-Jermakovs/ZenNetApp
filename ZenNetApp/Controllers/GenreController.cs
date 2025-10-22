@@ -27,7 +27,17 @@ namespace ZenNetApp.Controllers
         // GET: GenreController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            // Iegūstan žanru pēc id un nosūtam visus ieraksta datus
+            var genre = _context.Genres
+                .Include(g => g.Books)
+                .FirstOrDefault(g => g.Id == id);
+
+            if (genre == null)
+            {
+                return NotFound();
+            }
+
+            return View(genre);
         }
 
         // GET: GenreController/Create

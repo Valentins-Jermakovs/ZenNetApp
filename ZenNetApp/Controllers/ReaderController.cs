@@ -26,7 +26,16 @@ namespace ZenNetApp.Controllers
         // GET: ReaderController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var reader = _context.Readers
+                .Include(r => r.BorrowedBooks) // Iekļauj saistītās grāmatas
+                .FirstOrDefault(r => r.Id == id);
+
+            if (reader == null)
+            {
+                return NotFound();
+            }
+
+            return View(reader);
         }
 
         // GET: ReaderController/Create

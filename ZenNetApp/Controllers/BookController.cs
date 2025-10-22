@@ -29,7 +29,24 @@ namespace ZenNetApp.Controllers
         // GET: BookController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            // Atrodam grāmatu pēc Id, iekļaujot saistītās entītijas
+            // un atgriežam to skatā
+            var book = _context.Books
+                //.Include(b => b.Id)
+                .Include(b => b.Author)
+                .Include(b => b.Genre)
+                .Include(b => b.Publisher)
+                .Include(b => b.BorrowedBy)
+                // Filtrējam pēc Id
+                .FirstOrDefault(b => b.Id == id);
+
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return View(book);
         }
 
         // GET: BookController/Create

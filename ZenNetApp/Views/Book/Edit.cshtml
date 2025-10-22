@@ -9,7 +9,9 @@
 
 <h2>Edit Book</h2>
 
-<form asp-action="Create" method="post">
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" /> <!-- Id ir obligāts -->
+    <div asp-validation-summary="ModelOnly" class="text-red-500 text-sm"></div>
     <div>
         <label asp-for="Title"></label>
         <input asp-for="Title" />
@@ -39,5 +41,5 @@
             <option>---Null---</option>
         </select>
     </div>
-    <button type="submit">Create</button>
+    <button type="submit">Save</button>
 </form>

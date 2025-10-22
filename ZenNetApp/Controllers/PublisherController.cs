@@ -26,7 +26,16 @@ namespace ZenNetApp.Controllers
         // GET: PublisherController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var publisher = _context.Publishers
+                .Include(p => p.Books) // Iekļauj saistītās grāmatas
+                .FirstOrDefault(p => p.Id == id);
+            
+            if (publisher == null)
+            {
+                return NotFound();
+            }
+
+            return View(publisher);
         }
 
         // GET: PublisherController/Create
