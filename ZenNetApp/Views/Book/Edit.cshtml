@@ -5,42 +5,65 @@
 }
 @model ZenNetApp.Models.Book
 
-<h2 class="text-2xl font-bold mb-4">Edit Book</h2>
+<div class="w-full flex flex-col p-8 bg-gray-900 text-gray-100 min-h-screen font-sans items-center justify-center">
+    <h2 class="text-3xl font-semibold mb-8 text-white">Rediģēt grāmatu</h2>
 
-<h2>Edit Book</h2>
+    <form asp-action="Edit" method="post" class="w-full max-w-lg space-y-6 bg-gray-800 p-8 rounded-lg shadow-lg">
+        <!-- Hidden Id -->
+        <input type="hidden" asp-for="Id" />
 
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="Id" /> <!-- Id ir obligāts -->
-    <div asp-validation-summary="ModelOnly" class="text-red-500 text-sm"></div>
-    <div>
-        <label asp-for="Title"></label>
-        <input asp-for="Title" />
-        <span asp-validation-for="Title"></span>
-    </div>
-    <div>
-        <label asp-for="Year"></label>
-        <input asp-for="Year" />
-        <span asp-validation-for="Year"></span>
-    </div>
-    <div>
-        <label asp-for="AuthorId">Author</label>
-        <select asp-for="AuthorId" asp-items="ViewBag.Authors"></select>
-    </div>
-    <div>
-        <label asp-for="GenreId">Genre</label>
-        <select asp-for="GenreId" asp-items="ViewBag.Genres"></select>
-    </div>
-    <div>
-        <label asp-for="PublisherId">Publisher</label>
-        <select asp-for="PublisherId" asp-items="ViewBag.Publishers">
-        </select>
-    </div>
-    <div>
-        <label asp-for="BorrowedById">Borrowed By</label>
-        <select asp-for="BorrowedById" asp-items="ViewBag.Readers">
-            <option>---Null---</option>
-        </select>
-    </div>
-    <button type="submit">Save</button>
-    <a asp-action="Index" class="ml-2 text-gray-700 hover:underline">Cancel</a>
-</form>
+        <!-- Validation summary -->
+        <div asp-validation-summary="ModelOnly" class="text-red-500 text-sm mb-4"></div>
+
+        <!-- Title -->
+        <div class="flex flex-col">
+            <label asp-for="Title" class="mb-2 text-sm font-medium text-gray-300">Virsraksts</label>
+            <input asp-for="Title" class="bg-gray-700 text-white border border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <span asp-validation-for="Title" class="text-red-500 text-sm mt-1"></span>
+        </div>
+
+        <!-- Year -->
+        <div class="flex flex-col">
+            <label asp-for="Year" class="mb-2 text-sm font-medium text-gray-300">Gads, kad grāmta parādījāš bibliotēkā</label>
+            <input asp-for="Year" type="number" class="bg-gray-700 text-white border border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <span asp-validation-for="Year" class="text-red-500 text-sm mt-1"></span>
+        </div>
+
+        <!-- Author -->
+        <div class="flex flex-col">
+            <label asp-for="AuthorId" class="mb-2 text-sm font-medium text-gray-300">Autors</label>
+            <select asp-for="AuthorId" asp-items="ViewBag.Authors" class="bg-gray-700 text-white border border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </select>
+        </div>
+
+        <!-- Genre -->
+        <div class="flex flex-col">
+            <label asp-for="GenreId" class="mb-2 text-sm font-medium text-gray-300">Žanrs</label>
+            <select asp-for="GenreId" asp-items="ViewBag.Genres" class="bg-gray-700 text-white border border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </select>
+        </div>
+
+        <!-- Publisher -->
+        <div class="flex flex-col">
+            <label asp-for="PublisherId" class="mb-2 text-sm font-medium text-gray-300">Izdevējs</label>
+            <select asp-for="PublisherId" asp-items="ViewBag.Publishers" class="bg-gray-700 text-white border border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </select>
+        </div>
+
+        <!-- Borrowed By -->
+        <div class="flex flex-col">
+            <label asp-for="BorrowedById" class="mb-2 text-sm font-medium text-gray-300">Pašlaik lasa</label>
+            <select asp-for="BorrowedById" asp-items="ViewBag.Readers" class="bg-gray-700 text-white border border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option>Nav lasītāja</option>
+            </select>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex items-center space-x-4">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+                Saglabāt
+            </button>
+            <a asp-action="Index" class="text-gray-400 hover:text-gray-200 hover:underline transition">Atcelt</a>
+        </div>
+    </form>
+</div>
