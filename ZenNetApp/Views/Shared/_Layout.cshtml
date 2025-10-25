@@ -1,33 +1,30 @@
 ﻿<!DOCTYPE html>
-<html lang="lv">
+<html lang="lv" class="min-h-full w-full m-0 p-0">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>@ViewData["Title"] - ZenNetApp</title>
 </head>
-<body class="w-full h-screen flex-column flex-column justify-between items-center">
-    <header>
-        <div class="w-full flex-column flex bg-black text-white p-5 justify-between">
-            <h3 class="text-3xl font-bold">ZenLib</h3>
-        </div>
+<body class="min-h-screen flex flex-col justify-between bg-black text-white m-0 p-0">
+    <header class="w-full bg-black p-5 flex justify-between">
+        <h3 class="text-3xl font-bold">ZenLib</h3>
     </header>
-    <div class="w-full h-full flex-1 ">
-        @RenderBody()
-    </div>
 
-    <footer class="w-full bg-black text-white flex-column flex justify-center items-center p-5">
-        <!-- Copyright -->
-        <div class="">
-            2025 © 
-            <a href="https://github.com/Valentins-Jermakovs">Valentīns Jermakovs</a>
+    <main class="w-full flex-1 bg-white text-black">
+        @RenderBody()
+    </main>
+
+    <footer class="w-full bg-black text-white flex justify-center items-center p-5">
+        <div>
+            2025 ©
+            <a href="https://github.com/Valentins-Jermakovs" class="underline">Valentīns Jermakovs</a>
         </div>
-        <!-- Copyright -->
     </footer>
+
     @await RenderSectionAsync("Scripts", required: false)
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
-
 </body>
 </html>

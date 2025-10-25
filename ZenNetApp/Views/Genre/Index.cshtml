@@ -52,11 +52,11 @@
                             <td class="p-3 border border-gray-600">@genre.Name</td>
                             <td class="p-3 border border-gray-600">
                                 <!-- Rediģēt -->
-                                <a asp-action="Edit" asp-route-id="@genre.Id" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">Rediģēt</a>
+                                <a asp-action="Edit" asp-route-id="@genre.Id" class="py-1 px-2 bg-gray-800 border border-gray-700 hover:bg-gray-600 cursor-pointer">Rediģēt</a>
                                 <!-- Dzēst -->
-                                <a asp-action="Delete" asp-route-id="@genre.Id" class="bg-red-600  text-white px-3 py-1 rounded hover:bg-red-700">Dzēst</a>
+                                <a asp-action="Delete" asp-route-id="@genre.Id" class="py-1 px-2 bg-gray-800 border border-gray-700 hover:bg-gray-600 cursor-pointer">Dzēst</a>
                                 <!-- Links uz details -->
-                                <a asp-action="Details" asp-route-id="@genre.Id" class="bg-blue-600  text-white px-3 py-1 rounded hover:bg-blue-700">Details</a>
+                                <a asp-action="Details" asp-route-id="@genre.Id" class="py-1 px-2 bg-gray-800 border border-gray-700 hover:bg-gray-600 cursor-pointer">Skatīt vairāk</a>
                             </td>
                         </tr>
                     }
@@ -67,7 +67,7 @@
 
     <!-- Links uz Create formu -->
     <div class="mt-6">
-        <a asp-action="Create" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Pievienot jaunu žanru</a>
+        <a asp-action="Create" class="py-2 px-4 bg-gray-800 border border-gray-700 hover:bg-gray-600 cursor-pointer">Pievienot jaunu žanru</a>
     </div>
 
 </div>

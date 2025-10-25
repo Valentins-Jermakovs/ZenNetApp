@@ -55,10 +55,10 @@
                             <!-- Poga uz datu update -->
                             <td class="p-3 border border-gray-600">
                                 <!-- Rediģēt -->
-                                <a asp-action="Edit" asp-route-id="@book.Id" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">Rediģēt</a>
+                                <a asp-action="Edit" asp-route-id="@book.Id" class="py-1 px-2 bg-gray-800 border border-gray-700 hover:bg-gray-600 cursor-pointer">Rediģēt</a>
                                 <!-- Dzēst -->
-                                <a asp-action="Delete" asp-route-id="@book.Id" class="bg-red-600  text-white px-3 py-1 rounded hover:bg-red-700">Dzēst</a>
-                                <a class="bg-blue-600  text-white px-3 py-1 rounded hover:bg-blue-700" asp-area="" asp-route-id="@book.Id" asp-controller="Book" asp-action="Details">Apsaktīt detalizētāk</a>
+                                <a asp-action="Delete" asp-route-id="@book.Id" class="py-1 px-2 bg-gray-800 border border-gray-700 hover:bg-gray-600 cursor-pointer">Dzēst</a>
+                                <a class="py-1 px-2 bg-gray-800 border border-gray-700 hover:bg-gray-600 cursor-pointer" asp-area="" asp-route-id="@book.Id" asp-controller="Book" asp-action="Details">Skatīt vairāk</a>
                             </td>
                         </tr>
                         
@@ -71,7 +71,7 @@
     <!-- Create tabula -->
     <!-- Links uz Create formu -->
     <div class="mt-6">
-        <a asp-action="Create" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Pievienot jaunu žanru</a>
+        <a asp-action="Create" class="py-2 px-4 bg-gray-800 border border-gray-700 hover:bg-gray-600 cursor-pointer">Pievienot jaunu grāmatu</a>
     </div>
 
 </div>
