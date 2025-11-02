@@ -35,7 +35,7 @@
                         <td class="p-3 border border-gray-600">@Model.Id</td>
                         <td class="p-3 border border-gray-600">@Model.Name</td>
                         <td class="p-3 border border-gray-600">
-                            <ul>
+                            <ul class="list-disc p-5">
                                 <!-- Izvadam visas žanra grāmatas -->
                                 @foreach (var book in Model.Books)
                                 {
@@ -54,5 +54,8 @@
         </div>
     </section>
 
+    <div class="mt-6">
+        <a asp-area="" asp-controller="Genre" asp-action="Index" class="py-2 px-4 bg-gray-800 border border-gray-700 hover:bg-gray-600 cursor-pointer">Atpakaļ</a>
+    </div>
 
 </div>
