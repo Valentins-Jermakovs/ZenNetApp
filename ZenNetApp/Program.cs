@@ -3,6 +3,8 @@
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Swagger
+builder.Services.AddSwaggerGen();
 
 
 // Pieslēdzam Context.cs
@@ -32,6 +34,9 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 
 app.Run();
