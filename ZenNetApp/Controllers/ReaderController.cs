@@ -47,7 +47,7 @@ namespace ZenNetApp.Controllers
         // POST: ReaderController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Reader reader)
+        public ActionResult Create(Reader reader)
         {
             if (ModelState.IsValid)
             {
@@ -126,6 +126,29 @@ namespace ZenNetApp.Controllers
             _context.Readers.Remove(reader);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
+        }
+
+        // Metodes, kas meklē lasītājus un izvada ar viņiem saistītas grāmatas
+
+        // GET: ReaderController/Search
+        public ActionResult Search()
+        {
+            return View();
+        }
+        // POST: ReaderController/Search
+        [HttpPost]
+        public ActionResult Search(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return View();
+            }
+
+            var readers = _context.Readers
+                .Include(r => r.BorrowedBooks)
+                .Where(r => r.Name.Contains(query) || r.Email.Contains(query))
+                .ToList();
+            return View(readers);
         }
     }
 }

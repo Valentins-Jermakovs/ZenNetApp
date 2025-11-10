@@ -1,0 +1,84 @@
+﻿@model List<ZenNetApp.Models.Reader>
+
+
+<div class="w-full flex flex-col p-8 bg-gray-900 text-gray-100 min-h-screen font-sans">
+
+
+    <header class="mb-8">
+        <h1 class="text-3xl font-bold tracking-wide">Meklēt lasītāju</h1>
+        <p class="text-gray-400 mt-2">Ievadiet vārdu vai e‑pastu, lai atrastu lasītāju sistēmā.</p>
+    </header>
+
+
+    <section class="mb-6 p-5 bg-gray-800 rounded">
+        <form method="post">
+            <input type="text" name="query" placeholder="Ievadiet vārdu vai e‑pastu..."
+                   class="w-full p-3 bg-gray-700 border border-gray-600 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500" />
+
+
+            <button class="mt-3 py-2 px-4 bg-gray-700 border border-gray-600 hover:bg-gray-600 cursor-pointer">
+                Meklēt
+            </button>
+        </form>
+
+
+        @if (ViewBag.Message != null)
+        {
+            <p class="text-red-400 mt-3">@ViewBag.Message</p>
+        }
+    </section>
+
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <section class="mt-8 w-full">
+            <h2 class="text-xl font-semibold mb-4">Meklēšanas rezultāti</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-700 text-left text-gray-100 bg-gray-800">
+                    <thead class="bg-gray-700">
+                        <tr>
+                            <th class="p-3 border border-gray-600">Vārds</th>
+                            <th class="p-3 border border-gray-600">E‑pasts</th>
+                            <th class="p-3 border border-gray-600">Aizņemtās grāmatas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var reader in Model)
+                        {
+                            <tr class="hover:bg-gray-700">
+                                <td class="p-3 border border-gray-600">@reader.Name</td>
+                                <td class="p-3 border border-gray-600">@reader.Email</td>
+                                <td class="p-3 border border-gray-600">
+                                    @if (reader.BorrowedBooks != null && reader.BorrowedBooks.Any())
+                                    {
+                                        <ul class="list-disc list-inside">
+                                            @foreach (var book in reader.BorrowedBooks)
+                                            {
+                                                <li>@book.Title</li>
+                                            }
+                                        </ul>
+                                    }
+                                    else
+                                    {
+                                        <span>Nav aizņemto grāmatu</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    }
+    else if (Model != null)
+    {
+        <p class="text-gray-300 mt-6">Nekas netika atrasts.</p>
+    }
+
+
+    <div class="mt-6">
+        <a asp-action="Index" asp-controller="Reader" class="py-2 px-4 bg-gray-800 border border-gray-700 hover:bg-gray-600 cursor-pointer">Atpakaļ</a>
+    </div>
+
+
+</div>

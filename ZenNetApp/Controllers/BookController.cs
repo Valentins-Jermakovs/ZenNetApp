@@ -74,7 +74,7 @@ namespace ZenNetApp.Controllers
             _context.Books.Add(book);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
-            
+
             //return View(book);
         }
 
@@ -97,7 +97,7 @@ namespace ZenNetApp.Controllers
         // POST: BookController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id,Book book)
+        public ActionResult Edit(int id, Book book)
         {
             ViewBag.Authors = new SelectList(_context.Authors, "Id", "Name");
             ViewBag.Genres = new SelectList(_context.Genres, "Id", "Name");
@@ -108,11 +108,11 @@ namespace ZenNetApp.Controllers
             {
                 return NotFound();
             }
-            
+
             _context.Update(book);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
-            
+
         }
 
         // GET: BookController/Delete/5
@@ -138,12 +138,42 @@ namespace ZenNetApp.Controllers
             {
                 return NotFound();
             }
-           
-            
+
+
             _context.Books.Remove(book);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
-            
+
+        }
+
+        // Get book list by user input
+
+        // GET
+        public ActionResult Search()
+        {
+            return View();
+        }
+        // POST
+        [HttpPost]
+        public ActionResult Search(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return View();
+            }
+
+            var books = _context.Books
+                .Include(b => b.Author)
+                .Include(b => b.Genre)
+                .Include(b => b.Publisher)
+                .Include(b => b.BorrowedBy)
+                .Where(b => b.Title.Contains(query) ||
+                            b.Author.Name.Contains(query) ||
+                            b.Genre.Name.Contains(query) ||
+                            b.Publisher.Name.Contains(query))
+                .ToList();
+
+            return View(books);
         }
     }
 }

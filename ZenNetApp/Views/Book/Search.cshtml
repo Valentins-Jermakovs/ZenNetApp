@@ -1,0 +1,66 @@
+﻿@model List<ZenNetApp.Models.Book>
+
+
+<div class="w-full flex flex-col p-8 bg-gray-900 text-gray-100 min-h-screen font-sans">
+
+
+    <header class="mb-8">
+        <h1 class="text-3xl font-bold tracking-wide">Meklēt grāmatu</h1>
+        <p class="text-gray-400 mt-2">Ievadiet nosaukumu, autoru, žanru vai izdevēju, lai atrastu grāmatu.</p>
+    </header>
+
+
+    <section class="mb-6 p-5 bg-gray-800 rounded">
+        <form method="post">
+            <input type="text" name="query" placeholder="Nosaukums, autors, žanrs..." value="@Context.Request.Query["query"]"
+                   class="w-full p-3 bg-gray-700 border border-gray-600 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500" />
+
+
+            <button class="mt-3 py-2 px-4 bg-gray-700 border border-gray-600 hover:bg-gray-600 cursor-pointer">
+                Meklēt
+            </button>
+        </form>
+    </section>
+
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <section class="mt-6">
+            <h4 class="text-lg font-semibold mb-3">Atrastas @Model.Count grāmatas:</h4>
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-700 text-left text-gray-100 bg-gray-800">
+                    <thead class="bg-gray-700">
+                        <tr>
+                            <th class="p-3 border border-gray-600">Nosaukums</th>
+                            <th class="p-3 border border-gray-600">Autors</th>
+                            <th class="p-3 border border-gray-600">Žanrs</th>
+                            <th class="p-3 border border-gray-600">Izdevējs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var book in Model)
+                        {
+                            <tr class="hover:bg-gray-700">
+                                <td class="p-3 border border-gray-600">@book.Title</td>
+                                <td class="p-3 border border-gray-600">@book.Author?.Name</td>
+                                <td class="p-3 border border-gray-600">@book.Genre?.Name</td>
+                                <td class="p-3 border border-gray-600">@book.Publisher?.Name</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    }
+    else if (Model != null)
+    {
+        <p class="text-gray-300 mt-3">Nekas netika atrasts.</p>
+    }
+
+
+    <div class="mt-6">
+        <a asp-action="Index" asp-controller="Book" class="py-2 px-4 bg-gray-800 border border-gray-700 hover:bg-gray-600 cursor-pointer">Atpakaļ</a>
+    </div>
+
+
+</div>

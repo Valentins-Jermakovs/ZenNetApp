@@ -139,5 +139,28 @@ namespace ZenNetApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
+
+        // Metodes izdevēja un saistīto grāmatu meklēšanai
+
+        // GET: PublisherController/Search
+        public ActionResult Search()
+        {
+            return View();
+        }
+        // POST: PublisherController/SearchResults
+        [HttpPost]
+        public ActionResult Search(string publisherName)
+        {
+            if (string.IsNullOrWhiteSpace(publisherName))
+            {
+                return View();
+            }
+
+            var results = _context.Publishers
+                .Where(p => p.Name.Contains(publisherName))
+                .Include(p => p.Books) // Iekļauj saistītās grāmatas
+                .ToList();
+            return View(results);
+        }
     }
 }
