@@ -21,14 +21,16 @@ namespace ZenNetApp.API
             _context = context;
         }
 
-        // GET: api/Books
+        // ======== LINQ GET methods =============================================
+        // search all books
+        // GET: api/Books - stock method
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
         {
             return await _context.Books.ToListAsync();
         }
-
-        // GET: api/Books/5
+        // search book by id
+        // GET: api/Books/5 - stock method
         [HttpGet("{id}")]
         public async Task<ActionResult<Book>> GetBook(int id)
         {
@@ -41,6 +43,23 @@ namespace ZenNetApp.API
 
             return book;
         }
+        // GET sorted by title
+        [HttpGet("sortedByTitle")]
+        public async Task<ActionResult<IEnumerable<Book>>> GetBooksSortedByTitle()
+        {
+            return await _context.Books
+                .OrderBy(b => b.Title)
+                .ToListAsync();
+        }
+        // GET sorted by year
+        [HttpGet("sortedByYear")]
+        public async Task<ActionResult<IEnumerable<Book>>> GetBooksSortedByYear()
+        {
+            return await _context.Books
+                .OrderBy(b => b.Year)
+                .ToListAsync();
+        }
+        // ========================================================================
 
         // PUT: api/Books/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -84,6 +103,56 @@ namespace ZenNetApp.API
             return CreatedAtAction("GetBook", new { id = book.Id }, book);
         }
 
+        // ===== LINQ POST ============================================================
+        // 3 LINQ POST - search methods
+        // Search by book title
+        [HttpPost("searchByTitle")]
+        public async Task<ActionResult<IEnumerable<Book>>> SearchByTitle([FromBody] string title)
+        {
+            var books = await _context.Books
+                .Where(b => b.Title.ToLower().Contains(title.ToLower()))
+                .ToListAsync();
+
+            if (books.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return books;
+        }
+        // Search by year
+        [HttpPost("searchByYear")]
+        public async Task<ActionResult<IEnumerable<Book>>> GetBooksNewerThan([FromBody] int year)
+        {
+            var books = await _context.Books
+                .Where(b => b.Year == year)
+                .ToListAsync();
+
+            if (books.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return books;
+        }
+        // Search books by author
+        [HttpPost("searchByAuthor")]
+        public async Task<ActionResult<IEnumerable<Book>>> GetBooksByAuthor([FromBody] string author)
+        {
+            var books = await _context.Books
+                .Where(b => b.Author.Name.ToLower().Contains(author.ToLower()))
+                .ToListAsync();
+
+            if (books.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return books;
+        }
+        // ============================================================================
+
+        // ===== LINQ DELETE =============
         // DELETE: api/Books/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)
